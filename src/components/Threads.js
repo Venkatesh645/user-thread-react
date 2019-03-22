@@ -1,32 +1,49 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getThreads } from '../actions/thread.actions';
+import { getThreads, updateThreadSearch } from '../actions/thread.actions';
 
-const Tag = ({ tags }) => {
-  debugger
-  return <div>{tags && tags.map(t => {
-    return <span>{t}</span>
-  })}</div>
+const Tag = ({ tags, username, date }) => {
+  return <div className='tags-div'>{tags && tags.map(t => {
+    return <span className='thread-tag'>{t}</span>
+  })}<span className='single-thread-date'>Date: {new Date(date).toLocaleString()}</span>
+  <span className='single-thread-username'>Created By: {username}</span>
+  </div>
 }
 
 const SingleThread = (item) => {
+  console.log(item, 'item');
   const { title, username, description, tags } = item;
-  debugger
   return <div className='single-thread-wrapper'>
     <h4>{title}</h4>
     <p>{description}</p>
-    <Tag tags={item.tags} />
+    <Tag tags={item.tags} username={item.username} date={item.createdDate} />
   </div>
 }
+
+let timeout = '';
 
 class Thread extends Component {
   constructor(props){
     super(props);
     this.navigateToCreateThread = this.navigateToCreateThread.bind(this);
+    this.filterThreads = this.filterThreads.bind(this);
+    this.threadTimeOut = '';
+  }
+
+  filterThreads = (event) => {
+    const { backItems, updateThreadSearch } = this.props;
+      const newArray = [...backItems].filter(i =>
+      i.title.toLowerCase().includes(event.target.value));
+      clearTimeout(this.threadTimeOut );
+   this.threadTimeOut = setTimeout(() => {
+      updateThreadSearch(newArray)
+      console.log(timeout, 'timeout');
+    console.log(newArray, 'newArray');
+   }, 300);
+
   }
 
   componentDidMount() {
-    debugger
     const { getThreads } = this.props;
     getThreads();
   }
@@ -45,7 +62,7 @@ class Thread extends Component {
           <button className='thread-search-button-wrapper' >
           <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
         </button>
-        <input type="text" placeholder='search...' className='thread-search-field' />
+        <input type="text" placeholder='search...' className='thread-search-field' onChange={this.filterThreads} />
         </div>
         <hr />
         <div className='thread-list'>
@@ -60,12 +77,13 @@ class Thread extends Component {
 }
 
 const mapStateToProps = state => {
-  const { items } = state.thread;
-  return { items }
+  const { items, backItems } = state.thread;
+  return { items, backItems }
 }
 
 const actions = {
   getThreads,
+  updateThreadSearch,
 }
 
 export default connect(mapStateToProps, actions)(Thread);

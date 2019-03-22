@@ -82,6 +82,22 @@ body{
     height: 60px;
 }
 
+.thread-tag{
+  padding: 2px;
+  border: 1px solid grey;
+  border-radius: 3px;
+  margin: 4px;
+}
+
+.tags-div{
+  position: relative;
+}
+
+.single-thread-username, .single-thread-date{
+  float: right;
+  padding: 0px 2px 0px 30px;
+}
+
 /************ Thread List END*********/
 /****************** HEADER ************/
 .header-wrapper{

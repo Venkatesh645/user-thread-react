@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createThreads } from '../actions/thread.actions';
+import { successAlertHandler, failureAlertHandler } from '../actions/alert.actions';
 
 class CreateThread extends Component {
   constructor(props) {
@@ -27,15 +28,18 @@ class CreateThread extends Component {
   createThreadSubmit = (e) => {
     debugger
     e.preventDefault();
-    const { createThreads } = this.props;
+    const { createThreads, successAlertHandler, failureAlertHandler } = this.props;
     createThreads(this.state)
       .then(resp => {
         debugger
-      })
-      .catch(error => {
-        debugger
-        console.log('error', error);
-      })
+        if(resp.type === "CREATE_THREAD_REQUEST_FAILURE") return failureAlertHandler(resp.error);
+        successAlertHandler(resp.resp.message);
+        this.setState({
+          title: '',
+          description: '',
+          tags: '',
+        })
+      });
   }
 
 
@@ -69,6 +73,8 @@ const mapStateToProps = state => {
 
 const actions = {
   createThreads,
+  successAlertHandler,
+  failureAlertHandler,
 }
 
 export default connect(mapStateToProps, actions)(CreateThread);

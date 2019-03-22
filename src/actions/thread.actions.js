@@ -5,6 +5,7 @@ export const THREAD_LIST_REQUEST_SUCCESS='THREAD_LIST_REQUEST_SUCCESS';
 export const THREAD_LIST_REQUEST_FAILURE='THREAD_LIST_REQUEST_FAILURE';
 export const CREATE_THREAD_REQUEST_SUCCESS='CREATE_THREAD_REQUEST_SUCCESS';
 export const CREATE_THREAD_REQUEST_FAILURE='CREATE_THREAD_REQUEST_FAILURE';
+export const THREAD_FILTER_UPDATE='THREAD_FILTER_UPDATE';
 
 const apiRequest = () =>({
   type: API_REQUEST,
@@ -33,19 +34,29 @@ const createThreadRequestFailure = resp =>({
 
 
 export const getThreads = () => (dispatch) => {
-  debugger
   dispatch(apiRequest());
   return api.get('/thread/list')
-  .then(resp => Promise.resolve(dispatch(threadListRequestSuccess(resp))))
+  .then(resp => {
+    if(!resp.success) return dispatch(threadListRequestFailure(resp.message));
+    return Promise.resolve(dispatch(threadListRequestSuccess(resp)))})
   .catch(error => Promise.reject(dispatch(threadListRequestFailure((error)))));
 };
 
 export const createThreads = (body) => (dispatch) => {
-  debugger
   dispatch(apiRequest());
   return api.post('/thread/create', {...body})
-  .then(resp => Promise.resolve(dispatch(createThreadRequestSuccess(resp))))
+  .then(resp => {
+    if(!resp.success) return dispatch(createThreadRequestFailure(resp.message));
+    return Promise.resolve(dispatch(createThreadRequestSuccess(resp)))})
   .catch(error => Promise.reject(dispatch(createThreadRequestFailure((error)))));
 };
+
+export const updateThreadSearch = (newArray) => {
+  debugger
+  return {
+    type: THREAD_FILTER_UPDATE,
+    newArray,
+  }
+}
 
 

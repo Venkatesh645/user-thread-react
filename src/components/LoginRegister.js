@@ -39,8 +39,6 @@ class LoginRegister extends Component {
     const { register, failureAlertHandler, successAlertHandler  } = this.props;
     register(this.state)
       .then((res) => {
-        debugger
-        console.log(this.props);
         if(res.type === "LOGIN_REQUEST_FAILURE") return failureAlertHandler(res.error);
         successAlertHandler(res.resp.message);
         this.setState({

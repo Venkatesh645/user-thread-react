@@ -37,24 +37,20 @@ const registerRequestFailure = error => (
 
 
 export const login = body => (dispatch) => {
-  debugger
   dispatch(apiRequest());
   return api.post('/signin', {...body})
   .then(resp => {
-      debugger
       if(!resp.success) return dispatch(loginRequestFailure(resp.message));
       localStorage.setItem('token', resp.token);
       localStorage.setItem('username', resp.username);
       return Promise.resolve(dispatch(registerRequestSuccess(resp)));
     })
   .catch(error => {
-      debugger
       return Promise.reject(dispatch(registerRequestFailure(error)));
     })
 };
 
 export const register = body => (dispatch) => {
-  debugger
   dispatch(apiRequest());
   return api.post('/register', {...body})
   .then(resp => {
