@@ -1,11 +1,19 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import LoginRegister from './LoginRegister.js';
+import Threads from './Threads.js';
+import CreateThread from './CreateThread.js';
+import Header from './Header';
 
 const Main = () => {
-   return <Router>
+   return <Switch>
+   <div className='main-wrapper'>
+    <Header />
     <Route exact path="/" component={LoginRegister} />
-   </Router>
+    <Route exact path="/thread/list" component={Threads} />
+    <Route exact path="/thread/create" component={CreateThread} />
+    </div>
+   </Switch>
 }
 
 export default Main;

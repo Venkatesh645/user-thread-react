@@ -13,8 +13,8 @@ body{
   font-family: 'Lato', sans-serif;
 }
 
+/**********Login Register*********/
 .login-register-wrapper{
-  width: 200px;
   margin: 10px auto;
   text-align: center;
 }
@@ -22,3 +22,137 @@ body{
 .login-register-wrapper input{
   text-align: center;
 }
+
+.login-register-form{
+   width: 37%;
+    margin: auto;
+    border: 1px solid;
+    padding: 43px 40px;
+    border-radius: 2px;
+    box-shadow: 1px 1px 11px 1px #cec7c7;
+    border-color: white;
+}
+
+.login-register-btn-wrp{
+
+}
+/**********Login Register End*********/
+/************ Thread List *********/
+
+.single-thread-wrapper{
+  border: 1px solid black;
+  padding: 1%;
+  margin: 1%;
+}
+
+.threads-list-wrapper{
+  margin: 2% 5%
+}
+
+.thread-list{
+  height: 400px;
+  overflow: scroll;
+}
+
+.subname-wrapper{
+  position: relative;
+}
+
+.thread-search-button-wrapper{
+  position: absolute;
+  right: 0px;
+  bottom: 1px;
+  border: 0px;
+}
+
+.thread-search-field{
+  position: absolute;
+  right: 17px;
+  bottom: 1px;
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+  padding: 2px 1px;
+}
+
+.add-thread-btn{
+    float: right;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+}
+
+/************ Thread List END*********/
+/****************** HEADER ************/
+.header-wrapper{
+  position: relative;
+}
+
+.header-wrapper button {
+  display: inline-block;
+}
+
+.header-wrapper h2 {
+  display: inline-block;
+  margin-top: 0;
+  margin-bottom: 0;
+  vertical-align: middle;
+  font-size: 46px;
+  margin-left: 10px;
+  font-weight: 100;
+}
+
+.username-wrapper{
+  position: absolute;
+  right: 0px;
+  border: 1px solid grey;
+  margin: 0.5%;
+  padding: 1%;
+  top: 1px;
+}
+
+.login-register-title-div{
+  position: absolute;
+  right: 0px;
+  margin: 0.5%;
+  padding: 1%;
+  top: 1px;
+}
+
+/****************** HEADER END ************/
+
+/************ New Thread **********/
+.new-thread-form-wrapper{
+    margin: 2% 5%;
+}
+
+.new-thread-form{
+  margin: 30px 0px 0px 0px;
+}
+
+.new-thread-form label{
+  width: 100px;
+  position: relative;
+}
+
+.new-thread-form label span{
+  position: absolute;
+  right: 2px;
+}
+
+.new-thread-form input, textarea {
+  width: 50%;
+  margin-bottom: 10px;
+  padding: 2px 3px;
+  border-radius: 3px;
+}
+
+.new-thread-form input.btn {
+  width: 10%;
+}
+
+.description-label{
+  float: left;
+}
+/************ New Thread End**********/
+

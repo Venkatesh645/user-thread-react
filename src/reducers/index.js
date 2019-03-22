@@ -1,6 +1,10 @@
 import { combineReducers } from 'redux';
-import sessions from './sessions.reducers';
+import registerLogin from './registerLogin.reducers';
+import thread from './thread.reducers';
+import alert from './alert.reducers';
 
 export default combineReducers({
-  sessions,
+  registerLogin,
+  thread,
+  alert,
 })
