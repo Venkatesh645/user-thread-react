@@ -3,12 +3,13 @@ import {
   THREAD_LIST_REQUEST_SUCCESS,
   THREAD_LIST_REQUEST_FAILURE,
   THREAD_FILTER_UPDATE,
+  USERNAME_TO_STORE,
 } from '../actions/thread.actions'
 
 const initialState = {
   backItems: [],
   items: [],
-  pending: false,
+  pending: false
 }
 const thread = (state = initialState, action) => {
   switch (action.type) {

@@ -120,7 +120,7 @@ body{
 
 .username-wrapper{
   position: absolute;
-  right: 0px;
+  right: 100px;
   border: 1px solid grey;
   margin: 0.5%;
   padding: 1%;
@@ -133,6 +133,13 @@ body{
   margin: 0.5%;
   padding: 1%;
   top: 1px;
+}
+
+.logout{
+  position: absolute;
+  right: 25px;
+  top: 18px;
+  cursor: pointer;;
 }
 
 /****************** HEADER END ************/

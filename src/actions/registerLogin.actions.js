@@ -1,11 +1,13 @@
 /* global fetch */
 /* global localStorage */
 import { api } from './api-lib/api';
-const API_REQUEST='API_REQUEST';
-const REGISTER_REQUEST_SUCCESS='REGISTER_REQUEST_SUCCESS';
-const REGISTER_REQUEST_FAILURE='REGISTER_REQUEST_FAILURE';
-const LOGIN_REQUEST_SUCCESS='LOGIN_REQUEST_SUCCESS';
-const LOGIN_REQUEST_FAILURE='LOGIN_REQUEST_FAILURE';
+export const API_REQUEST='API_REQUEST';
+export const REGISTER_REQUEST_SUCCESS='REGISTER_REQUEST_SUCCESS';
+export const REGISTER_REQUEST_FAILURE='REGISTER_REQUEST_FAILURE';
+export const LOGIN_REQUEST_SUCCESS='LOGIN_REQUEST_SUCCESS';
+export const LOGIN_REQUEST_FAILURE='LOGIN_REQUEST_FAILURE';
+export const USERNAME_TO_STORE= 'USERNAME_TO_STORE';
+export const DELETE_USERNAME='DELETE_USERNAME';
 
 const apiRequest = () =>({
   type: API_REQUEST,
@@ -35,6 +37,19 @@ const registerRequestFailure = error => (
   error
 });
 
+export const usernameToStore = () => {
+  debugger
+  return {
+    type: USERNAME_TO_STORE,
+    payload: localStorage.getItem('username') }
+}
+
+export const removeUserNameFromStore = () => {
+  return{
+    type: DELETE_USERNAME,
+  }
+}
+
 
 export const login = body => (dispatch) => {
   dispatch(apiRequest());
@@ -43,7 +58,7 @@ export const login = body => (dispatch) => {
       if(!resp.success) return dispatch(loginRequestFailure(resp.message));
       localStorage.setItem('token', resp.token);
       localStorage.setItem('username', resp.username);
-      return Promise.resolve(dispatch(registerRequestSuccess(resp)));
+      return Promise.resolve(dispatch(loginRequestSuccess(resp)));
     })
   .catch(error => {
       return Promise.reject(dispatch(registerRequestFailure(error)));
