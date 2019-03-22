@@ -28,26 +28,25 @@ class LoginRegister extends Component {
     login(this.state)
       .then((res) => {
         debugger
-        if(res.type === "REGISTER_REQUEST_FAILURE") return failureAlertHandler(res.error);
-        failureAlertHandler(res.message);
+        if(res.type === "LOGIN_REQUEST_FAILURE") return failureAlertHandler(res.error);
+        successAlertHandler(res.resp.message);
         history.push('/thread/list');
       })
   };
 
   onRegisterSubmit = (e) => {
     e.preventDefault();
-    const { register } = this.props;
+    const { register, failureAlertHandler, successAlertHandler  } = this.props;
     register(this.state)
       .then((res) => {
         debugger
         console.log(this.props);
+        if(res.type === "LOGIN_REQUEST_FAILURE") return failureAlertHandler(res.error);
+        successAlertHandler(res.resp.message);
         this.setState({
-          username: undefined,
-          password: undefined
+          username: '',
+          password: ''
         })
-      })
-      .catch((err) => {
-        console.log('error:', err);
       })
   }
 

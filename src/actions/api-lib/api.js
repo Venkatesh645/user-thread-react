@@ -6,16 +6,18 @@ const setHeaders = () => {
   return localStorage.getItem('token');
 }
 
-const headers = {
+const headers = () => {
+  return {
   'Content-Type': 'application/json',
   'authorization': setHeaders() || '',
+  }
 }
 
 export const api = {
   get: (path) => {
     return new Promise((resolve, reject) => {
       return fetch(`${ROOT_API_URL}${path}`,{
-        headers,
+        headers: headers(),
       })
         .then(resp => resp.json())
         .then(resp => resolve(resp))
@@ -26,7 +28,7 @@ export const api = {
     payload = {
       method: 'post',
       body: JSON.stringify(payload),
-      headers
+      headers: headers(),
     }
     return new Promise((resolve, reject) => {
       return fetch(`${ROOT_API_URL}${path}`, payload)
@@ -39,7 +41,7 @@ export const api = {
     payload = {
       method: 'put',
       body: JSON.stringify(payload),
-      headers
+      headers: headers(),
     }
     return new Promise((resolve, reject) => {
       return fetch(`${ROOT_API_URL}${path}`, payload)

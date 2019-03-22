@@ -10,7 +10,7 @@ class Header extends Component {
   }
 
   showUserName = (username) => {
-    if(username){
+    if(username !== "undefined"){
       return <div className='username-wrapper'>
           <span>{username}</span>
         </div>
@@ -25,7 +25,7 @@ class Header extends Component {
       <div className='header-wrapper'>
       <button type="button" class="btn btn-default btn-lg">
         <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
-          {this.showUserName(eval(username))}
+          {this.showUserName(username)}
         </button>
         <h2>Decoder</h2>
 
